@@ -42,6 +42,10 @@ namespace Mashirojs.Event
 
         public static void SendEvent<T>(T e) where T : struct
         {
+            if (!_listeners.ContainsKey(typeof(T))) {
+                return;
+            }
+
             var listeners = _listeners[typeof(T)];
             foreach (var listener in listeners)
             {
