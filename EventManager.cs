@@ -9,6 +9,16 @@ namespace Mashirojs.Event
         void OnEvent(T e);
     }
 
+    public static class EventListenerExtension
+    {
+        public static void AddListener<T>(this IEventListener<T> listener) where T : struct {
+            EventManager.AddListener<T>(listener);
+        }
+        public static void RemoveListener<T>(this IEventListener<T> listener) where T : struct {
+            EventManager.AddListener<T>(listener);
+        }
+    }
+
     public static class EventManager {
         private static Dictionary<Type, List<IEventListenerBase>> _listeners = new Dictionary<Type, List<IEventListenerBase>>();
 
