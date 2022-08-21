@@ -15,7 +15,7 @@ namespace Mashirojs.Event
             EventManager.AddListener<T>(listener);
         }
         public static void RemoveListener<T>(this IEventListener<T> listener) where T : struct {
-            EventManager.AddListener<T>(listener);
+            EventManager.RemoveListener<T>(listener);
         }
     }
 
@@ -37,6 +37,10 @@ namespace Mashirojs.Event
 
         public static void RemoveListener<T>(IEventListener<T> listener) where T: struct
         {
+            if (!_listeners.ContainsKey(typeof(T))) {
+                return;
+            }
+
             _listeners[typeof(T)].Remove(listener);
         }
 
